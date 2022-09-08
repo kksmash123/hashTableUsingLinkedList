@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+using namespace std;
 
 class Node
 {
@@ -18,7 +19,7 @@ public:
     hashtable();
     int hash(int key);
     void insert(int key);
-    int search(int key);
+    bool search(int key);
 };
 
 
@@ -72,6 +73,18 @@ void hashtable::insert(int key)
 
 }
 
+bool hashtable::search(int key)
+{
+    Node* p=ht[hash(key)];
+
+    while (p)
+    {
+        if (p->data == key)
+            return 1;
+        p = p->next;
+    }
+    return 0;
+}
 
 
 int main()
@@ -85,6 +98,8 @@ int main()
     for (int i = 0; i < n;i++)
         h.insert(a[i]);
 
+
+    cout<<h.search(122);
 
 
     return 0;
