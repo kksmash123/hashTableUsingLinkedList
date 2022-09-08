@@ -20,6 +20,7 @@ public:
     int hash(int key);
     void insert(int key);
     bool search(int key);
+    void Delete(int key);
 };
 
 
@@ -86,6 +87,39 @@ bool hashtable::search(int key)
     return 0;
 }
 
+void hashtable::Delete(int key)
+{
+    int i = hash(key);
+
+   Node* p= ht[i];
+
+   if (!p)
+       return;
+
+   //first node in that location
+   if (p->data == key)
+   {
+       ht[i] = p->next;
+       delete p;
+       return;
+   }
+
+    Node* q = nullptr;
+
+    while (p && p->data!=key)
+    {
+        q = p;
+        p = p->next;
+          
+    }
+    if (p->data == key)
+    {
+        q->next = p->next;
+        delete p;
+    }
+    
+}
+
 
 int main()
 {
@@ -100,7 +134,8 @@ int main()
 
 
     cout<<h.search(122);
-
+    
+    h.Delete(75);
 
     return 0;
 }
